@@ -2,21 +2,18 @@ pipeline {
     agent any
 
     stages {
+
         stage('Build') {
             steps {
-                echo 'Building the project...'
+                echo 'Building Docker image...'
+                sh 'docker build -t jenkins-node-app .'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Testing the project...'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deploying the project...'
+                echo 'Testing Docker image...'
+                sh 'docker run --rm jenkins-node-app'
             }
         }
     }
